@@ -27,6 +27,7 @@ public class Practice06Test {
 	public boolean isPalindrome(String item) {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
+			// Make the item we want to insert a character, then make sure it is a letter
 			char addThis = item.charAt(i);
 			if (addThis >= 'a' && addThis <= 'z' || addThis >= 'A' && addThis <= 'Z') {
 				stack.push(item.substring(i, i+1));
@@ -37,6 +38,7 @@ public class Practice06Test {
 		while (! stack.empty() && ! queue.empty()) {
 			String stackReturn = String.valueOf(stack.pop());
 			String queueReturn = String.valueOf(queue.dequeue());
+			// Ignore case when comparing
 			if (! stackReturn.equalsIgnoreCase(queueReturn)) {
 				return false;
 			}

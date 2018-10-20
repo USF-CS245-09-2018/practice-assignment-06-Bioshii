@@ -12,6 +12,7 @@ public class ArrayQueue implements Queue {
 	// Removes the first item that was inputed
 	public Object dequeue() {
 		if (empty()) {
+			// Can't throw exception without changing main class, so returning null
 			return null;
 		}
 
@@ -29,10 +30,13 @@ public class ArrayQueue implements Queue {
 
 	// Adds an item to the queue
 	public void enqueue(Object item) {
+		// Assign the next availalble position (tail) the new item
 		arr[tail++] = item;
 
+		// If tail equals the head, grow the array
 		if((tail) % arr.length == head) {
 			grow_array();
+		// If the tail didn't reach head but it an't go any further, make it 0
 		} else if (tail == arr.length) {
 		    tail = 0;
         }
@@ -50,12 +54,14 @@ public class ArrayQueue implements Queue {
 
 	// Double the size of the array
 	public void grow_array() {
+		// This is simply, copyign values to a new array
 		Object[] temp = new Object[arr.length*2];
 		tail = 0;
 		for (int i = head; i < arr.length + head; i++) {
 			temp[tail++] = arr[i%arr.length];
 		}
 
+		// After doing this, the head will be at 0
 		head = 0;
 		this.arr = temp;
 	}
